@@ -1,6 +1,6 @@
 find_path(LIBNEO4J_INCLUDE_DIR neo4j-client.h
     PATHS ${CMAKE_SOURCE_DIR}/common/external/libneo4j-client/src/lib
-          ${CMAKE_SOURCE_DIR}/external/libneo4j-client/lib
+          ${CMAKE_SOURCE_DIR}/external/libneo4j-client/src/lib
     HINTS $ENV{LIBNEO4J_INCLUDE_DIR}
 )
 
