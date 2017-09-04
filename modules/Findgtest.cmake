@@ -34,7 +34,8 @@ mark_as_advanced(
 
 set(GTEST_LIBRARIES ${GTEST_LIBRARY} CACHE STRING "gtest library")
 set(GTEST_MAIN_LIBRARIES ${GTEST_MAIN_LIBRARY} CACHE STRING "gtest main library")
-set(GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR} CACHE STRING "gtest include dir")
+set(GTEST_INCLUDE_DIRS ${GTEST_INCLUDE_DIR} CACHE STRING "gtest include dirs")
+set(GTEST_INCLUDE_DIR  ${GTEST_INCLUDE_DIR} CACHE STRING "gtest include dir")
 
 set_package_properties(gtest PROPERTIES
   URL "https://code.google.com/p/googletest/"

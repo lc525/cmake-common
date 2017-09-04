@@ -35,14 +35,7 @@ function(lib_test test_NAME test_SOURCES)
     endif (${ARGC} LESS 3)
     #MESSAGE(${test_LINK})
 
-    include_directories(${GTEST_INCLUDE_DIRS})
-
     add_executable(${test_NAME} ${test_SOURCES})
-    target_link_libraries(${test_NAME} ${test_LINK})
-
-    add_test(ctest_build_${test_NAME} "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target ${test_NAME})
-    add_test(run_${test_NAME} ${test_NAME} --gtest_output=xml ${ARGV3})
-
     # wait for http://public.kitware.com/Bug/view.php?id=8438 to be solved
     # in order to clean this up properly (i.e do not use duplicate tests
     # to build dependencies and test binaries on make test/check:
@@ -50,9 +43,17 @@ function(lib_test test_NAME test_SOURCES)
     #add_dependencies(test ${test_NAME})
     #add_dependencies(check ${test_NAME})
     if(NOT GTEST_FOUND)
-      add_dependencies(${test_NAME} gtest_external)
+      add_dependencies(${test_NAME} gtest)
       #set_tests_properties(ctest_build_${test_NAME} PROPERTIES DEPENDS gtest_external)
+      include_directories("${CMAKE_SOURCE_DIR}/external/gtest/include")
+    else()
+      target_include_directories(${test_NAME} PUBLIC ${GTEST_INCLUDE_DIR})
     endif()
+    target_link_libraries(${test_NAME} ${test_LINK})
+
+    add_test(NAME ctest_build_${test_NAME} COMMAND "${CMAKE_COMMAND}" --build ${CMAKE_BINARY_DIR} --target ${test_NAME})
+    add_test(NAME run_${test_NAME} COMMAND ${test_NAME} --gtest_output=xml ${ARGV3})
+
 
     set_tests_properties(run_${test_NAME} PROPERTIES DEPENDS ctest_build_${test_NAME})
   endif(WITH_TESTS)

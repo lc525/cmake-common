@@ -6,7 +6,7 @@ find_path(LIBNEO4J_INCLUDE_DIR neo4j-client.h
 
 find_library(LIBNEO4J_LIBRARY
     NAMES libneo4j-client.so
-    PATHS ${CMAKE_SOURCE_DIR}/common/external/libneo4j-client/src/lib/
+    PATHS ${CMAKE_SOURCE_DIR}/common/external/libneo4j-client/src/lib
           ${CMAKE_SOURCE_DIR}/external/libneo4j-client/src/lib
     HINTS $ENV{LIBNEO4J_LIB_DIR}
     PATH_SUFFIXES .libs
